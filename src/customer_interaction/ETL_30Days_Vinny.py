@@ -85,34 +85,6 @@ def save_data(result,save_path):
 	result.repartition(1).write.mode("overwrite").option("header","true").csv(save_path)
 	return print("Data Saved Successfully")
 
-def import_to_mysql(result):
-
-    url = (
-        "jdbc:mysql://127.0.0.1:3306/bigdata"
-        "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-    )
-
-    props = {
-        "user": "root",
-        "password": "Wcq@D09c",
-        "driver": "com.mysql.cj.jdbc.Driver"
-    }
-
-    # (Optional but recommended) reduce risk of OOM + improve write stability
-    result_to_write = result.repartition(20)
-
-    (result_to_write.write
-        .format("jdbc")
-        .option("url", url)
-        .option("dbtable", "customer_content_stats")
-        .options(**props)
-        .option("batchsize", 10000)   # <-- integer, not string
-        .mode("overwrite")
-        .save()
-    )
-
-    print("✅ Data Imported Successfully to bigdata.customer_content_stats")
-
 
 
 def etl_main(df,df_active):
@@ -135,9 +107,6 @@ def etl_main(df,df_active):
     print('-------------Saving Results --------------')
     print('-----------------------------')
     #save_data(result,save_path)
-    print('Import result to mysql')
-    print('-----------------------------')
-    import_to_mysql(result)
     print("Finished job")
     return result
     
