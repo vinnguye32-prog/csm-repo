@@ -6,6 +6,13 @@ This project builds a small analytics warehouse on Databricks using two ETL pipe
 
 ## Architecture (High Level)
 
+### Data Source/Storage:
+
+Data is placed in S3 bucket to be read from databrick Python scripts.
+
+<img width="1434" height="662" alt="82990" src="https://github.com/user-attachments/assets/c8deaad5-a92c-4517-897b-3d23e9264c1e" />
+
+
 ### ETL Pipelines
 1. **`ETL_Most_Searched.py`**  
    Produces: **`workspace.csm_project.fact_monthly_customer_behavior`**  
@@ -35,6 +42,9 @@ Key outputs:
 - `vw_program_duration_contract_stats` – duration + contract coverage by program category
 - `vw_customer_taste_contract_devices` – contract distribution by customer taste
 - `top10_contract_by_program(program_name)` – parameterized top-10 query by program duration
+
+<img width="350" height="427" alt="My organization" src="https://github.com/user-attachments/assets/558a856b-fd94-4730-82ec-83dbe1dded95" />
+
 
 ---
 
